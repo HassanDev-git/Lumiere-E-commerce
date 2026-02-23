@@ -1,0 +1,773 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HK-Dev | Hassan Khan - Prompt Engineer & AI Developer</title>
+    <meta name="description" content="Professional portfolio of Hassan Khan, a Prompt Engineer and AI Applications Developer with 2 years of experience.">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- AOS Animation Library -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            black: '#050505',
+                            dark: '#0a0a0a',
+                            yellow: '#FACC15',
+                            yellowHover: '#EAB308',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        display: ['Space Grotesk', 'sans-serif'],
+                    },
+                    backgroundImage: {
+                        'grid-pattern': "linear-gradient(to right, #1f1f1f 1px, transparent 1px), linear-gradient(to bottom, #1f1f1f 1px, transparent 1px)",
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            background-color: #050505;
+            color: #ffffff;
+            overflow-x: hidden;
+        }
+        
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0a0a0a;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #FACC15;
+            border-radius: 5px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #EAB308;
+        }
+
+        .text-gradient {
+            background: linear-gradient(to right, #FACC15, #FDE047);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .glass-nav {
+            background: rgba(5, 5, 5, 0.8);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        .card-hover:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px -15px rgba(250, 204, 21, 0.2);
+            border-color: #FACC15;
+        }
+
+        #loader {
+            position: fixed;
+            inset: 0;
+            background: #050505;
+            z-index: 9999;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: opacity 0.5s ease;
+        }
+        .loader-circle {
+            width: 50px;
+            height: 50px;
+            border: 3px solid #1f1f1f;
+            border-top-color: #FACC15;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin { to { transform: rotate(360deg); } }
+
+        #hero-canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            opacity: 0.4;
+        }
+
+        .form-message {
+            padding: 1rem;
+            border-radius: 0.5rem;
+            margin-top: 1rem;
+            text-align: center;
+            display: none;
+        }
+        .form-success {
+            background: rgba(34, 197, 94, 0.1);
+            border: 1px solid #22c55e;
+            color: #22c55e;
+        }
+        .form-error {
+            background: rgba(239, 68, 68, 0.1);
+            border: 1px solid #ef4444;
+            color: #ef4444;
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <!-- Preloader -->
+    <div id="loader">
+        <div class="flex flex-col items-center gap-4">
+            <div class="loader-circle"></div>
+            <div class="text-brand-yellow font-display font-bold tracking-widest text-sm">HK-DEV</div>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 glass-nav transition-all duration-300" id="navbar">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <div class="flex-shrink-0 cursor-pointer" onclick="window.scrollTo(0,0)">
+                    <span class="font-display font-bold text-2xl text-white">HK<span class="text-brand-yellow">-DEV</span></span>
+                </div>
+                
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-8">
+                        <a href="#home" class="hover:text-brand-yellow transition-colors px-3 py-2 rounded-md text-sm font-medium">Home</a>
+                        <a href="#about" class="hover:text-brand-yellow transition-colors px-3 py-2 rounded-md text-sm font-medium">About</a>
+                        <a href="#services" class="hover:text-brand-yellow transition-colors px-3 py-2 rounded-md text-sm font-medium">Services</a>
+                        <a href="#projects" class="hover:text-brand-yellow transition-colors px-3 py-2 rounded-md text-sm font-medium">Projects</a>
+                        <a href="#contact" class="bg-brand-yellow text-black hover:bg-brand-yellowHover px-4 py-2 rounded-full text-sm font-bold transition-all transform hover:scale-105">Contact Me</a>
+                    </div>
+                </div>
+
+                <div class="-mr-2 flex md:hidden">
+                    <button type="button" onclick="toggleMobileMenu()" class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-800 focus:outline-none">
+                        <i class="fas fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="md:hidden hidden bg-brand-dark border-b border-gray-800" id="mobile-menu">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <a href="#home" onclick="toggleMobileMenu()" class="text-gray-300 hover:text-brand-yellow block px-3 py-2 rounded-md text-base font-medium">Home</a>
+                <a href="#about" onclick="toggleMobileMenu()" class="text-gray-300 hover:text-brand-yellow block px-3 py-2 rounded-md text-base font-medium">About</a>
+                <a href="#services" onclick="toggleMobileMenu()" class="text-gray-300 hover:text-brand-yellow block px-3 py-2 rounded-md text-base font-medium">Services</a>
+                <a href="#projects" onclick="toggleMobileMenu()" class="text-gray-300 hover:text-brand-yellow block px-3 py-2 rounded-md text-base font-medium">Projects</a>
+                <a href="#contact" onclick="toggleMobileMenu()" class="text-brand-yellow block px-3 py-2 rounded-md text-base font-medium">Contact Me</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="relative min-h-screen flex items-center justify-center overflow-hidden pt-20">
+        <canvas id="hero-canvas"></canvas>
+        <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <div data-aos="fade-up" data-aos-duration="1000">
+                <p class="text-brand-yellow font-medium tracking-widest uppercase mb-4">Welcome to my portfolio</p>
+                <h1 class="text-5xl md:text-7xl lg:text-8xl font-display font-bold mb-6 leading-tight">
+                    I am <span class="text-gradient">Hassan Khan</span>
+                </h1>
+                <h2 class="text-2xl md:text-4xl text-gray-300 font-light mb-8">
+                    Prompt Engineer & <span class="text-white font-semibold">AI Apps Developer</span>
+                </h2>
+                <p class="max-w-2xl mx-auto text-gray-400 text-lg mb-10">
+                    Crafting intelligent digital experiences. I bridge the gap between human intent and artificial intelligence to build the future of web applications.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                    <a href="#projects" class="px-8 py-4 bg-brand-yellow text-black font-bold rounded-full hover:bg-brand-yellowHover transition-all transform hover:scale-105 shadow-[0_0_20px_rgba(250,204,21,0.3)]">
+                        View Projects
+                    </a>
+                    <a href="#contact" class="px-8 py-4 border border-gray-600 text-white font-bold rounded-full hover:border-brand-yellow hover:text-brand-yellow transition-all">
+                        Contact Me
+                    </a>
+                </div>
+            </div>
+            
+            <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce">
+                <a href="#about" class="text-gray-500 hover:text-brand-yellow transition-colors">
+                    <i class="fas fa-chevron-down text-2xl"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-24 bg-brand-dark relative">
+        <div class="absolute top-0 left-0 w-full h-full bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAiIGhlaWdodD0iMjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGNpcmNsZSBjeD0iMSIgY3k9IjEiIHI9IjEiIGZpbGw9IiMzMzMiIGZpbGwtb3BhY2l0eT0iMC4yIi8+PC9zdmc+')] opacity-20"></div>
+        
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+                <!-- Image Side - AAPKI IMAGE YAHAN ADD KI HAI -->
+                <div class="relative" data-aos="fade-right">
+                    <div class="absolute -inset-4 bg-gradient-to-r from-brand-yellow to-orange-500 rounded-2xl blur-lg opacity-30 animate-pulse"></div>
+                    <div class="relative bg-gray-900 rounded-2xl overflow-hidden border border-gray-800 aspect-[4/5] group">
+                        <img src="https://scontent.fkhi16-2.fna.fbcdn.net/v/t39.30808-6/641324858_122246259866119255_3328765443638758236_n.jpg?stp=dst-jpg_p180x540_tt6&_nc_cat=108&ccb=1-7&_nc_sid=13d280&_nc_ohc=CRTcyBmxxwgQ7kNvwGHT-V0&_nc_oc=Adl5EEg2KDhMQ7OwWn206h9iYzGLjzFeamrB4HxVfqf-v7h2dhZCsYJNj0_iOlq8ep4&_nc_zt=23&_nc_ht=scontent.fkhi16-2.fna&_nc_gid=s1RzoTg__FcSCgLZm5ML8A&oh=00_AfsOm4SOfwlpXAxVALSwp8r6QDgPyPqE7JUKd643XONqug&oe=69A2524D" 
+                             alt="Hassan Khan - Prompt Engineer & AI Developer" 
+                             class="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500">
+                        
+                        <!-- Gradient Overlay -->
+                        <div class="absolute bottom-0 left-0 w-full h-1/3 bg-gradient-to-t from-black to-transparent"></div>
+                        
+                        <!-- Badge -->
+                        <div class="absolute bottom-6 left-6">
+                            <div class="flex items-center gap-2 text-brand-yellow bg-black/50 backdrop-blur-sm px-3 py-2 rounded-lg border border-brand-yellow/30">
+                                <i class="fas fa-code"></i>
+                                <span class="font-mono text-sm">2+ Years Experience</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div data-aos="fade-left">
+                    <h2 class="text-brand-yellow font-bold tracking-wider uppercase mb-2">About Me</h2>
+                    <h3 class="text-4xl md:text-5xl font-display font-bold mb-6">Building the <span class="text-gradient">AI-Powered</span> Future</h3>
+                    <p class="text-gray-400 text-lg mb-6 leading-relaxed">
+                        Hello! I'm Hassan Khan, a dedicated Prompt Engineer and AI Application Developer based in Pakistan. With over 2 years of hands-on experience, I specialize in transforming complex AI capabilities into intuitive, user-friendly applications.
+                    </p>
+                    <p class="text-gray-400 text-lg mb-8 leading-relaxed">
+                        My journey involves mastering the art of communication with Large Language Models (LLMs) and leveraging cutting-edge frameworks to build scalable web solutions. I don't just write code; I orchestrate intelligence.
+                    </p>
+
+                    <div class="space-y-4">
+                        <h4 class="text-white font-bold mb-4">Technical Expertise</h4>
+                        
+                        <div>
+                            <div class="flex justify-between mb-1">
+                                <span class="text-sm font-medium text-gray-300">Prompt Engineering & LLMs</span>
+                                <span class="text-sm font-medium text-brand-yellow">95%</span>
+                            </div>
+                            <div class="w-full bg-gray-800 rounded-full h-2.5">
+                                <div class="bg-brand-yellow h-2.5 rounded-full" style="width: 95%"></div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <div class="flex justify-between mb-1">
+                                <span class="text-sm font-medium text-gray-300">AI App Development (React/Node)</span>
+                                <span class="text-sm font-medium text-brand-yellow">90%</span>
+                            </div>
+                            <div class="w-full bg-gray-800 rounded-full h-2.5">
+                                <div class="bg-brand-yellow h-2.5 rounded-full" style="width: 90%"></div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <div class="flex justify-between mb-1">
+                                <span class="text-sm font-medium text-gray-300">API Integration (OpenAI, Claude, etc.)</span>
+                                <span class="text-sm font-medium text-brand-yellow">85%</span>
+                            </div>
+                            <div class="w-full bg-gray-800 rounded-full h-2.5">
+                                <div class="bg-brand-yellow h-2.5 rounded-full" style="width: 85%"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mt-10 flex gap-4">
+                        <div class="text-center">
+                            <h4 class="text-3xl font-bold text-white">2+</h4>
+                            <p class="text-sm text-gray-500">Years Exp.</p>
+                        </div>
+                        <div class="w-px bg-gray-800"></div>
+                        <div class="text-center">
+                            <h4 class="text-3xl font-bold text-white">20+</h4>
+                            <p class="text-sm text-gray-500">Projects</p>
+                        </div>
+                        <div class="w-px bg-gray-800"></div>
+                        <div class="text-center">
+                            <h4 class="text-3xl font-bold text-white">100%</h4>
+                            <p class="text-sm text-gray-500">Commitment</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="py-24 bg-black relative overflow-hidden">
+        <div class="absolute top-0 right-0 w-1/3 h-full bg-gradient-to-l from-brand-yellow/5 to-transparent"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="text-center mb-16" data-aos="fade-up">
+                <h2 class="text-brand-yellow font-bold tracking-wider uppercase mb-2">What I Do</h2>
+                <h3 class="text-4xl md:text-5xl font-display font-bold text-white">My <span class="text-gradient">Services</span></h3>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div class="bg-brand-dark p-8 rounded-2xl border border-gray-800 card-hover group" data-aos="fade-up" data-aos-delay="100">
+                    <div class="w-14 h-14 bg-gray-800 rounded-lg flex items-center justify-center mb-6 group-hover:bg-brand-yellow transition-colors">
+                        <i class="fas fa-robot text-2xl text-brand-yellow group-hover:text-black transition-colors"></i>
+                    </div>
+                    <h4 class="text-xl font-bold mb-3 text-white">AI App Development</h4>
+                    <p class="text-gray-400 text-sm leading-relaxed">
+                        Building full-stack applications powered by OpenAI, Claude, and other LLMs. From chatbots to complex automation tools.
+                    </p>
+                </div>
+
+                <div class="bg-brand-dark p-8 rounded-2xl border border-gray-800 card-hover group" data-aos="fade-up" data-aos-delay="200">
+                    <div class="w-14 h-14 bg-gray-800 rounded-lg flex items-center justify-center mb-6 group-hover:bg-brand-yellow transition-colors">
+                        <i class="fas fa-code text-2xl text-brand-yellow group-hover:text-black transition-colors"></i>
+                    </div>
+                    <h4 class="text-xl font-bold mb-3 text-white">Website Development</h4>
+                    <p class="text-gray-400 text-sm leading-relaxed">
+                        Modern, responsive, and high-performance websites using React, Next.js, and Tailwind CSS. SEO optimized and fast.
+                    </p>
+                </div>
+
+                <div class="bg-brand-dark p-8 rounded-2xl border border-gray-800 card-hover group" data-aos="fade-up" data-aos-delay="300">
+                    <div class="w-14 h-14 bg-gray-800 rounded-lg flex items-center justify-center mb-6 group-hover:bg-brand-yellow transition-colors">
+                        <i class="fas fa-terminal text-2xl text-brand-yellow group-hover:text-black transition-colors"></i>
+                    </div>
+                    <h4 class="text-xl font-bold mb-3 text-white">Prompt Engineering</h4>
+                    <p class="text-gray-400 text-sm leading-relaxed">
+                        Crafting sophisticated prompts to maximize AI model performance. System instructions, few-shot learning, and chain-of-thought.
+                    </p>
+                </div>
+
+                <div class="bg-brand-dark p-8 rounded-2xl border border-gray-800 card-hover group" data-aos="fade-up" data-aos-delay="400">
+                    <div class="w-14 h-14 bg-gray-800 rounded-lg flex items-center justify-center mb-6 group-hover:bg-brand-yellow transition-colors">
+                        <i class="fas fa-plug text-2xl text-brand-yellow group-hover:text-black transition-colors"></i>
+                    </div>
+                    <h4 class="text-xl font-bold mb-3 text-white">Custom AI Integrations</h4>
+                    <p class="text-gray-400 text-sm leading-relaxed">
+                        Seamlessly integrating AI capabilities into existing business workflows, CRMs, and internal tools to boost productivity.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="py-24 bg-brand-dark">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row justify-between items-end mb-12" data-aos="fade-up">
+                <div>
+                    <h2 class="text-brand-yellow font-bold tracking-wider uppercase mb-2">Portfolio</h2>
+                    <h3 class="text-4xl md:text-5xl font-display font-bold text-white">Featured <span class="text-gradient">Projects</span></h3>
+                </div>
+                <div class="mt-4 md:mt-0">
+                    <span class="text-gray-500 text-sm border border-gray-700 px-3 py-1 rounded-full">
+                        <i class="fas fa-info-circle mr-2"></i>Updating Soon
+                    </span>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="projects-grid">
+                <div class="group relative bg-black rounded-xl overflow-hidden border border-gray-800 hover:border-brand-yellow transition-all duration-300" data-aos="fade-up" data-aos-delay="100">
+                    <div class="aspect-video bg-gray-900 flex items-center justify-center relative overflow-hidden">
+                        <div class="absolute inset-0 bg-grid-pattern opacity-20"></div>
+                        <i class="fas fa-image text-4xl text-gray-700 group-hover:text-brand-yellow transition-colors"></i>
+                        <div class="absolute inset-0 bg-black/60 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+                            <span class="text-brand-yellow font-bold">Coming Soon</span>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h4 class="text-xl font-bold text-white mb-2">Project Alpha</h4>
+                        <p class="text-gray-400 text-sm mb-4">AI-powered content generation platform.</p>
+                        <div class="flex gap-2">
+                            <span class="text-xs bg-gray-800 text-gray-300 px-2 py-1 rounded">React</span>
+                            <span class="text-xs bg-gray-800 text-gray-300 px-2 py-1 rounded">OpenAI</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="group relative bg-black rounded-xl overflow-hidden border border-gray-800 hover:border-brand-yellow transition-all duration-300" data-aos="fade-up" data-aos-delay="200">
+                    <div class="aspect-video bg-gray-900 flex items-center justify-center relative overflow-hidden">
+                        <div class="absolute inset-0 bg-grid-pattern opacity-20"></div>
+                        <i class="fas fa-image text-4xl text-gray-700 group-hover:text-brand-yellow transition-colors"></i>
+                        <div class="absolute inset-0 bg-black/60 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+                            <span class="text-brand-yellow font-bold">Coming Soon</span>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h4 class="text-xl font-bold text-white mb-2">Project Beta</h4>
+                        <p class="text-gray-400 text-sm mb-4">Automated customer support chatbot.</p>
+                        <div class="flex gap-2">
+                            <span class="text-xs bg-gray-800 text-gray-300 px-2 py-1 rounded">Node.js</span>
+                            <span class="text-xs bg-gray-800 text-gray-300 px-2 py-1 rounded">NLP</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="group relative bg-black rounded-xl overflow-hidden border border-gray-800 hover:border-brand-yellow transition-all duration-300" data-aos="fade-up" data-aos-delay="300">
+                    <div class="aspect-video bg-gray-900 flex items-center justify-center relative overflow-hidden">
+                        <div class="absolute inset-0 bg-grid-pattern opacity-20"></div>
+                        <i class="fas fa-image text-4xl text-gray-700 group-hover:text-brand-yellow transition-colors"></i>
+                        <div class="absolute inset-0 bg-black/60 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+                            <span class="text-brand-yellow font-bold">Coming Soon</span>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h4 class="text-xl font-bold text-white mb-2">Project Gamma</h4>
+                        <p class="text-gray-400 text-sm mb-4">Data visualization dashboard.</p>
+                        <div class="flex gap-2">
+                            <span class="text-xs bg-gray-800 text-gray-300 px-2 py-1 rounded">D3.js</span>
+                            <span class="text-xs bg-gray-800 text-gray-300 px-2 py-1 rounded">Python</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section with Web3Forms -->
+    <section id="contact" class="py-24 bg-black relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16">
+                <div data-aos="fade-right">
+                    <h2 class="text-brand-yellow font-bold tracking-wider uppercase mb-2">Get In Touch</h2>
+                    <h3 class="text-4xl md:text-5xl font-display font-bold text-white mb-6">Let's <span class="text-gradient">Collaborate</span></h3>
+                    <p class="text-gray-400 text-lg mb-10">
+                        Have a project in mind? Looking for a partner to bring your AI ideas to life? I'm currently available for freelance work and open to new opportunities.
+                    </p>
+
+                    <div class="space-y-6">
+                        <div class="flex items-start gap-4">
+                            <div class="w-12 h-12 bg-gray-900 rounded-lg flex items-center justify-center flex-shrink-0 border border-gray-800">
+                                <i class="fas fa-envelope text-brand-yellow"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-white font-bold text-lg">Email</h4>
+                                <a href="mailto:hassank.dev@gmail.com" class="text-gray-400 hover:text-brand-yellow transition-colors">hassank.dev@gmail.com</a>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start gap-4">
+                            <div class="w-12 h-12 bg-gray-900 rounded-lg flex items-center justify-center flex-shrink-0 border border-gray-800">
+                                <i class="fab fa-whatsapp text-brand-yellow"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-white font-bold text-lg">WhatsApp</h4>
+                                <a href="https://wa.me/923112036769" target="_blank" class="text-gray-400 hover:text-brand-yellow transition-colors">+92 311 203 6769</a>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start gap-4">
+                            <div class="w-12 h-12 bg-gray-900 rounded-lg flex items-center justify-center flex-shrink-0 border border-gray-800">
+                                <i class="fas fa-map-marker-alt text-brand-yellow"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-white font-bold text-lg">Location</h4>
+                                <p class="text-gray-400">Pakistan (Available Worldwide)</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mt-10">
+                        <h4 class="text-white font-bold mb-4">Follow Me</h4>
+                        <div class="flex gap-4">
+                            <a href="#" class="w-10 h-10 rounded-full bg-gray-900 border border-gray-800 flex items-center justify-center text-gray-400 hover:bg-brand-yellow hover:text-black hover:border-brand-yellow transition-all">
+                                <i class="fab fa-github"></i>
+                            </a>
+                            <a href="#" class="w-10 h-10 rounded-full bg-gray-900 border border-gray-800 flex items-center justify-center text-gray-400 hover:bg-brand-yellow hover:text-black hover:border-brand-yellow transition-all">
+                                <i class="fab fa-linkedin-in"></i>
+                            </a>
+                            <a href="#" class="w-10 h-10 rounded-full bg-gray-900 border border-gray-800 flex items-center justify-center text-gray-400 hover:bg-brand-yellow hover:text-black hover:border-brand-yellow transition-all">
+                                <i class="fab fa-twitter"></i>
+                            </a>
+                            <a href="#" class="w-10 h-10 rounded-full bg-gray-900 border border-gray-800 flex items-center justify-center text-gray-400 hover:bg-brand-yellow hover:text-black hover:border-brand-yellow transition-all">
+                                <i class="fab fa-instagram"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Web3Forms Contact Form -->
+                <div class="bg-brand-dark p-8 rounded-2xl border border-gray-800" data-aos="fade-left">
+                    <form action="https://api.web3forms.com/submit" method="POST" id="contact-form">
+                        <input type="hidden" name="access_key" value="8b4cba7f-cdff-4fbc-aca2-9e93ba5e966d">
+                        <input type="hidden" name="subject" value="New Contact Form Submission from HK-Dev Portfolio">
+                        <input type="hidden" name="from_name" value="HK-Dev Portfolio">
+
+                        <div class="space-y-6">
+                            <div>
+                                <label for="name" class="block text-sm font-medium text-gray-300 mb-2">Your Name</label>
+                                <input type="text" id="name" name="name" required 
+                                    class="w-full bg-black border border-gray-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-brand-yellow focus:ring-1 focus:ring-brand-yellow transition-colors" 
+                                    placeholder="John Doe">
+                            </div>
+                            
+                            <div>
+                                <label for="email" class="block text-sm font-medium text-gray-300 mb-2">Your Email</label>
+                                <input type="email" id="email" name="email" required 
+                                    class="w-full bg-black border border-gray-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-brand-yellow focus:ring-1 focus:ring-brand-yellow transition-colors" 
+                                    placeholder="john@example.com">
+                            </div>
+                            
+                            <div>
+                                <label for="message" class="block text-sm font-medium text-gray-300 mb-2">Message</label>
+                                <textarea id="message" name="message" rows="4" required 
+                                    class="w-full bg-black border border-gray-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-brand-yellow focus:ring-1 focus:ring-brand-yellow transition-colors" 
+                                    placeholder="Tell me about your project..."></textarea>
+                            </div>
+
+                            <input type="checkbox" name="botcheck" class="hidden" style="display: none;">
+
+                            <button type="submit" id="submit-btn" 
+                                class="w-full bg-brand-yellow text-black font-bold py-4 rounded-lg hover:bg-brand-yellowHover transition-all transform hover:scale-[1.02] flex items-center justify-center gap-2">
+                                <span>Send Message</span>
+                                <i class="fas fa-paper-plane"></i>
+                            </button>
+                        </div>
+                    </form>
+                    
+                    <div id="success-message" class="form-message form-success">
+                        <i class="fas fa-check-circle mr-2"></i> Message sent successfully! I'll get back to you soon.
+                    </div>
+                    <div id="error-message" class="form-message form-error">
+                        <i class="fas fa-exclamation-circle mr-2"></i> Something went wrong. Please try again.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-black border-t border-gray-900 pt-16 pb-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
+                <div class="col-span-1 md:col-span-2">
+                    <span class="font-display font-bold text-2xl text-white">HK<span class="text-brand-yellow">-DEV</span></span>
+                    <p class="mt-4 text-gray-500 max-w-sm">
+                        Crafting intelligent digital solutions. Specializing in AI integration, prompt engineering, and modern web development.
+                    </p>
+                </div>
+                
+                <div>
+                    <h4 class="text-white font-bold mb-4">Quick Links</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#home" class="text-gray-500 hover:text-brand-yellow transition-colors">Home</a></li>
+                        <li><a href="#about" class="text-gray-500 hover:text-brand-yellow transition-colors">About</a></li>
+                        <li><a href="#services" class="text-gray-500 hover:text-brand-yellow transition-colors">Services</a></li>
+                        <li><a href="#projects" class="text-gray-500 hover:text-brand-yellow transition-colors">Projects</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="text-white font-bold mb-4">Contact</h4>
+                    <ul class="space-y-2">
+                        <li class="text-gray-500">hassank.dev@gmail.com</li>
+                        <li class="text-gray-500">+92 311 203 6769</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-900 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+                <p class="text-gray-600 text-sm">
+                    &copy; 2023-2024 Hassan Khan (HK-Dev). All rights reserved.
+                </p>
+                <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="w-10 h-10 rounded-full bg-gray-900 border border-gray-800 flex items-center justify-center text-gray-400 hover:bg-brand-yellow hover:text-black hover:border-brand-yellow transition-all">
+                    <i class="fas fa-arrow-up"></i>
+                </button>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        AOS.init({
+            once: true,
+            offset: 100,
+            duration: 800,
+        });
+
+        window.addEventListener('load', () => {
+            const loader = document.getElementById('loader');
+            loader.style.opacity = '0';
+            setTimeout(() => {
+                loader.style.display = 'none';
+            }, 500);
+        });
+
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        }
+
+        window.addEventListener('scroll', () => {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('shadow-lg');
+            } else {
+                navbar.classList.remove('shadow-lg');
+            }
+        });
+
+        const form = document.getElementById('contact-form');
+        const submitBtn = document.getElementById('submit-btn');
+        const successMsg = document.getElementById('success-message');
+        const errorMsg = document.getElementById('error-message');
+        const originalBtnText = submitBtn.innerHTML;
+
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i> Sending...';
+            
+            successMsg.style.display = 'none';
+            errorMsg.style.display = 'none';
+            
+            const formData = new FormData(form);
+            
+            fetch(form.action, {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => {
+                if (response.ok) {
+                    successMsg.style.display = 'block';
+                    form.reset();
+                    successMsg.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                } else {
+                    throw new Error('Form submission failed');
+                }
+            })
+            .catch(error => {
+                errorMsg.style.display = 'block';
+                errorMsg.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            })
+            .finally(() => {
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = originalBtnText;
+                
+                setTimeout(() => {
+                    successMsg.style.display = 'none';
+                    errorMsg.style.display = 'none';
+                }, 5000);
+            });
+        });
+
+        const canvas = document.getElementById('hero-canvas');
+        const ctx = canvas.getContext('2d');
+        
+        let width, height;
+        let particles = [];
+        
+        const particleCount = 60;
+        const connectionDistance = 150;
+        const mouseDistance = 200;
+        
+        let mouse = { x: null, y: null };
+        
+        window.addEventListener('mousemove', (e) => {
+            const rect = canvas.getBoundingClientRect();
+            mouse.x = e.clientX - rect.left;
+            mouse.y = e.clientY - rect.top;
+        });
+        
+        window.addEventListener('mouseleave', () => {
+            mouse.x = null;
+            mouse.y = null;
+        });
+        
+        function resize() {
+            width = canvas.width = window.innerWidth;
+            height = canvas.height = window.innerHeight;
+        }
+        
+        class Particle {
+            constructor() {
+                this.x = Math.random() * width;
+                this.y = Math.random() * height;
+                this.vx = (Math.random() - 0.5) * 0.5;
+                this.vy = (Math.random() - 0.5) * 0.5;
+                this.size = Math.random() * 2 + 1;
+            }
+            
+            update() {
+                this.x += this.vx;
+                this.y += this.vy;
+                
+                if (this.x < 0 || this.x > width) this.vx *= -1;
+                if (this.y < 0 || this.y > height) this.vy *= -1;
+                
+                if (mouse.x != null) {
+                    let dx = mouse.x - this.x;
+                    let dy = mouse.y - this.y;
+                    let distance = Math.sqrt(dx*dx + dy*dy);
+                    
+                    if (distance < mouseDistance) {
+                        const forceDirectionX = dx / distance;
+                        const forceDirectionY = dy / distance;
+                        const force = (mouseDistance - distance) / mouseDistance;
+                        const directionX = forceDirectionX * force * 0.5;
+                        const directionY = forceDirectionY * force * 0.5;
+                        
+                        this.vx -= directionX;
+                        this.vy -= directionY;
+                    }
+                }
+            }
+            
+            draw() {
+                ctx.fillStyle = '#FACC15';
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
+            }
+        }
+        
+        function init() {
+            resize();
+            particles = [];
+            for (let i = 0; i < particleCount; i++) {
+                particles.push(new Particle());
+            }
+        }
+        
+        function animate() {
+            ctx.clearRect(0, 0, width, height);
+            
+            for (let i = 0; i < particles.length; i++) {
+                particles[i].update();
+                particles[i].draw();
+                
+                for (let j = i; j < particles.length; j++) {
+                    let dx = particles[i].x - particles[j].x;
+                    let dy = particles[i].y - particles[j].y;
+                    let distance = Math.sqrt(dx*dx + dy*dy);
+                    
+                    if (distance < connectionDistance) {
+                        ctx.beginPath();
+                        ctx.strokeStyle = `rgba(250, 204, 21, ${1 - distance/connectionDistance})`;
+                        ctx.lineWidth = 1;
+                        ctx.moveTo(particles[i].x, particles[i].y);
+                        ctx.lineTo(particles[j].x, particles[j].y);
+                        ctx.stroke();
+                    }
+                }
+            }
+            requestAnimationFrame(animate);
+        }
+        
+        window.addEventListener('resize', init);
+        init();
+        animate();
+    </script>
+</body>
+</html>
