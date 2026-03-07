@@ -1,60 +1,53 @@
 # LUMIERE | Luxury Fashion House
 
-**LUMIERE** is a premium luxury fashion e-commerce website featuring an elegant, minimalist design with full dark mode support. Built with modern web technologies, it offers a seamless shopping experience for high-end fashion enthusiasts.
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=flat&logo=html5&logoColor=white)](https://developer.mozilla.org/en-US/docs/Web/HTML)
+[![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=flat&logo=tailwind-css&logoColor=white)](https://tailwindcss.com/)
+[![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=flat&logo=javascript&logoColor=black)](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
 
-🌐 **Live Demo**: https://lumiere.1yearstudents1.workers.dev
----
+&gt; A premium, fully-responsive e-commerce website for a luxury fashion brand featuring dark mode, complete shopping functionality, and elegant UI/UX design.
 
-## ✨ Features
+![LUMIERE Preview](https://scontent.fkhi16-1.fna.fbcdn.net/v/t39.30808-6/638856115_122245944446119255_5064726682394655905_n.jpg?stp=dst-jpg_s590x590_tt6&_nc_cat=107&ccb=1-7&_nc_sid=13d280&_nc_ohc=qYEvZexSdbYQ7kNvwF3RDEL&_nc_oc=AdlxZoYgYi0yDhvkDJzYqhFIZgFJ0KliT0Z9JiQzzFFAgc0QJRNungXDPmEIrN4Wjcs&_nc_zt=23&_nc_ht=scontent.fkhi16-1.fna&_nc_gid=r3sClGhusRHYyD63BCJQOQ&_nc_ss=8&oh=00_AfyWhCgyGZeRzwLQ7WNTFZnsnhi9NJhyM29WC5W7HyZXnA&oe=69B22B12)
 
-### 🎨 Design & UI
-- **Elegant Luxury Aesthetic** - Clean, sophisticated design with premium typography
-- **Dark Mode Support** - Full dark theme with localStorage persistence
-- **Responsive Design** - Optimized for desktop, tablet, and mobile devices
-- **Smooth Animations** - Scroll-triggered animations and hover effects
-- **Parallax Effects** - Immersive visual experience
+## 🌟 Features
 
-### 🛍️ E-Commerce Functionality
-- **Product Catalog** - Browse luxury fashion items with filtering and sorting
-- **Product Details** - Size selection, color options, quantity controls
-- **Shopping Cart** - Add/remove items, quantity management, price calculations
-- **Wishlist** - Save favorite items for later
-- **Checkout Process** - Multi-step checkout with shipping & payment
-- **Order Management** - View order history and track status
+### Core Functionality
+- **Multi-Page Architecture** - Seamless SPA-like experience with JavaScript routing
+- **Dark Mode** - Full dark theme support with localStorage persistence
+- **Responsive Design** - Mobile-first approach, works on all devices
+- **E-Commerce Ready** - Complete shopping cart, checkout, and product management
 
-### 👤 User Account System
-- **Authentication** - Login and signup functionality
-- **Account Dashboard** - Personalized user dashboard
-- **Order History** - Track past purchases
-- **Address Management** - Multiple shipping addresses
-- **Profile Settings** - Update personal information and preferences
+### Pages Included
+| Page | Description |
+|------|-------------|
+| 🏠 **Home** | Hero section, featured products, collections, testimonials, FAQ |
+| 🛍️ **Shop** | Product grid with filters, sorting, and search functionality |
+| 👗 **Product Detail** | Size/color selection, quantity picker, related products |
+| 📦 **Collections** | Seasonal lookbooks (Spring, Summer, Autumn, Winter) |
+| 🔐 **Login/Signup** | Authentication forms with social login options |
+| 👤 **My Account** | Dashboard, orders, addresses, wishlist, settings |
+| 💳 **Checkout** | Multi-step checkout with shipping & payment |
+| 📞 **Contact** | Contact form with store information |
+| 📄 **Legal Pages** | Shipping, Returns, Size Guide, Privacy Policy, Terms |
 
-### 📄 Content Pages
-- **Home** - Hero section, featured products, collections, testimonials
-- **Shop** - Complete product catalog with filters
-- **Collections** - Seasonal fashion collections showcase
-- **Heritage** - Brand story and craftsmanship details
-- **Services** - Bespoke services (Styling, Made-to-Measure, Private Showings)
-- **Contact** - Contact form and store information
-- **FAQ** - Frequently asked questions with accordion
+### Interactive Elements
+- ✅ **Shopping Cart** - Add/remove items, quantity management, price calculations
+- ❤️ **Wishlist** - Save favorite items for later
+- 🔍 **Search** - Real-time product search with suggestions
+- 🖼️ **Lightbox Gallery** - Image zoom with keyboard navigation
+- 📅 **Booking System** - Appointment scheduling for bespoke services
+- 🎠 **Testimonial Slider** - Auto-rotating customer reviews
+- 📱 **Mobile Menu** - Slide-out navigation for mobile devices
 
-### 🔧 Additional Features
-- **Search Functionality** - Real-time product search
-- **Image Lightbox** - Gallery view for product images
-- **Booking System** - Schedule private appointments
-- **Newsletter Subscription** - Email signup for updates
-- **Social Media Integration** - Instagram, Pinterest, TikTok links
+## 🚀 Live Demo
 
----
+**[View Live Demo](https://lumiere.1yearstudents1.workers.dev/)
 
 ## 🛠️ Technologies Used
 
-| Category | Technologies |
-|----------|-------------|
-| **Frontend** | HTML5, CSS3, JavaScript (Vanilla) |
-| **Styling** | Tailwind CSS |
-| **Icons** | Font Awesome 6.4.0 |
-| **Fonts** | Cormorant Garamond, Inter (Google Fonts) |
-| **Storage** | LocalStorage (for cart, wishlist, dark mode) |
+- **HTML5** - Semantic markup
+- **Tailwind CSS** - Utility-first CSS framework (via CDN)
+- **Vanilla JavaScript** - No frameworks, pure ES6+
+- **Font Awesome** - Icons
+- **Google Fonts** - Cormorant Garamond & Inter typography
 
----
